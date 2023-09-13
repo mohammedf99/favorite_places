@@ -42,7 +42,8 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                 decoration: const InputDecoration(
                   labelText: "Title",
                 ),
-                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton.icon(
