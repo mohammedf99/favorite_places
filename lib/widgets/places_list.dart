@@ -34,14 +34,24 @@ class PlacesList extends StatelessWidget {
     return ListView.builder(
       itemCount: places.length,
       itemBuilder: (ctx, index) {
-        return ListTile(
-          title: Text(
-            places[index].title,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: ListTile(
+            leading: Hero(
+              tag: places[index].id,
+              child: CircleAvatar(
+                radius: 26,
+                backgroundImage: FileImage(places[index].image),
+              ),
+            ),
+            title: Text(
+              places[index].title,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            onTap: () => _openPlaceDetails(context, places[index]),
           ),
-          onTap: () => _openPlaceDetails(context, places[index]),
         );
       },
     );
