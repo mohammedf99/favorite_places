@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+
+import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:favorite_places/providers/user_places.dart';
 
@@ -11,6 +14,7 @@ class NewPlaceScreen extends ConsumerStatefulWidget {
 
 class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
   final _titleController = TextEditingController();
+  File? _selectedImage;
 
   @override
   void dispose() {
@@ -22,7 +26,9 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
     if (_titleController.text.isEmpty) {
       return;
     }
-    ref.read(placeProvider.notifier).addPlace(_titleController.text);
+    ref
+        .read(placeProvider.notifier)
+        .addPlace(_titleController.text, _selectedImage!);
     Navigator.of(context).pop();
   }
 
@@ -44,6 +50,11 @@ class _NewPlaceScreenState extends ConsumerState<NewPlaceScreen> {
                 ),
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.onBackground),
+              ),
+              const SizedBox(height: 16.0),
+              // Image input goes here...
+              ImageInput(
+                onImageSelected: (pickedImage) => _selectedImage = pickedImage,
               ),
               const SizedBox(height: 16.0),
               ElevatedButton.icon(
