@@ -1,13 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:favorite_places/models/place.dart';
 
 class UserPlaces extends StateNotifier<List<Place>> {
   UserPlaces() : super(const []);
 
-  void addPlace(String title) {
+  void addPlace(String title, File image) {
     state = [
-      Place(title: title),
+      Place(title: title, image: image),
       ...state,
     ];
   }
